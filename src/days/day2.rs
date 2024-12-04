@@ -37,9 +37,10 @@ fn solution2() -> i32 {
             .map(|num| num.parse::<i32>().expect("Failed to parse"))
             .collect();
 
-        if is_safe_with_dampner(&report, |curr, next| -> bool {curr > next}) {
-            safe_report_count += 1;
-        } else if is_safe_with_dampner(&report,  |curr, next| -> bool {curr < next}) {
+        if is_safe(&report, 0, |curr, next| curr > next)
+            || is_safe(&report, 0, |curr, next| curr < next)
+            || is_safe_with_dampner(&report, |curr, next| curr > next)
+            || is_safe_with_dampner(&report, |curr, next| curr < next) {
             safe_report_count += 1;
         }
     }
