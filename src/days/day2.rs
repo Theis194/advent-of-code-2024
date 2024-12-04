@@ -17,9 +17,9 @@ fn solution1() -> i32 {
             .map(|num| num.parse::<i32>().expect("Failed to parse"))
             .collect();
 
-        if is_safe(&report, 0, 1, |curr, next| -> bool {curr > next}) {
+        if is_safe(&report, 0, |curr, next| -> bool {curr > next}) {
             safe_report_count += 1;
-        } else if is_safe(&report, 0, 1, |curr, next| -> bool {curr < next}) {
+        } else if is_safe(&report, 0, |curr, next| -> bool {curr < next}) {
             safe_report_count += 1;
         }
     }
@@ -37,9 +37,9 @@ fn solution2() -> i32 {
             .map(|num| num.parse::<i32>().expect("Failed to parse"))
             .collect();
 
-        if is_safe_with_dampner(&report, 0, 1, |curr, next| -> bool {curr > next}) {
+        if is_safe_with_dampner(&report, |curr, next| -> bool {curr > next}) {
             safe_report_count += 1;
-        } else if is_safe_with_dampner(&report, 0, 1, |curr, next| -> bool {curr < next}) {
+        } else if is_safe_with_dampner(&report,  |curr, next| -> bool {curr < next}) {
             safe_report_count += 1;
         }
     }
@@ -47,15 +47,15 @@ fn solution2() -> i32 {
     safe_report_count
 }
 
-fn is_safe(report: &Vec<i32>, current: i32, next: i32, condition: fn(i32, i32) -> bool) -> bool {
-    if next >= report.len() as i32 {
+fn is_safe(report: &Vec<i32>, current: i32, condition: fn(i32, i32) -> bool) -> bool {
+    if current + 1 >= report.len() as i32 {
         return true;
     }
 
-    if condition(report[current as usize], report[next as usize]) {
-        let distance = (report[current as usize] - report[next as usize]).abs();
+    if condition(report[current as usize], report[(current + 1) as usize]) {
+        let distance = (report[current as usize] - report[(current + 1) as usize]).abs();
         if distance >= 1 && distance <= 3 {
-            return is_safe(report, next, next + 1, condition);
+            return is_safe(report, current + 1, condition);
         } else {
             return false;
         }
@@ -64,13 +64,13 @@ fn is_safe(report: &Vec<i32>, current: i32, next: i32, condition: fn(i32, i32) -
     }
 }
 
-fn is_safe_with_dampner(report: &Vec<i32>, current: i32, next: i32, condition: fn(i32, i32) -> bool) -> bool {
+fn is_safe_with_dampner(report: &Vec<i32>, condition: fn(i32, i32) -> bool) -> bool {
     for i in 0..report.len() {
         // Try removing one element and check if the report becomes safe
         let mut new_report = report.clone();
         new_report.remove(i);
 
-        if is_safe(&new_report, 0, 1, condition) {
+        if is_safe(&new_report, 0, condition) {
             return true;
         }
     }
