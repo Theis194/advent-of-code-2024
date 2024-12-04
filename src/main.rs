@@ -1,3 +1,4 @@
+#![allow(unused)]
 use advent_of_code::days::{
     day1,
     day2
