@@ -1,7 +1,10 @@
-use advent_of_code::days::day1;
+use advent_of_code::days::{
+    day1,
+    day2
+};
 
 fn main() {
-    println!("day1");
+    println!("day2");
     println!("==========================");
-    day1::result();
+    day2::result();
 }
