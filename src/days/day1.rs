@@ -1,7 +1,14 @@
 use crate::read_file;
 use std::collections::HashMap;
 
-pub fn solution1() -> i64 {
+pub fn result() {
+    let result1 = solution1();
+    println!("Result: {}", result1);
+    let result2 = solution2();
+    println!("Result: {}", result2);
+}
+
+fn solution1() -> i64 {
     let lines = read_file("src/data/day1.txt");
 
     let mut left: Vec<i64> = Vec::new();
@@ -25,7 +32,7 @@ pub fn solution1() -> i64 {
     accumulator
 }
 
-pub fn solution2() -> i64 {
+fn solution2() -> i64 {
     let lines = read_file("src/data/day1.txt");
 
     let mut left: Vec<i64> = Vec::new();
