@@ -8,7 +8,7 @@ pub fn result() {
 }
 
 fn solution1() -> i32 {
-    let input = read_file("src/data/day3.txt");
+    let input = read_file("src/data/day4.txt");
 
     let height = input.len();
     let width = input[0].len();
@@ -27,7 +27,7 @@ fn solution1() -> i32 {
 }
 
 fn solution2() -> i32 {
-    let input = read_file("src/data/day3.txt");
+    let input = read_file("src/data/day4.txt");
 
     let height = input.len();
     let width = input[0].len();
