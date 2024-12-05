@@ -1,4 +1,4 @@
-use std::fs::File;
+use std::fs::{self, File};
 use std::io::{BufRead, BufReader};
 
 pub fn read_file(file: &str) -> Vec<String> {
@@ -14,4 +14,25 @@ pub fn read_file(file: &str) -> Vec<String> {
     }
 
     lines
+}
+
+pub fn read_file_split(file: &str) -> (Vec<String>, Vec<String>) {
+    let input= fs::read_to_string(file).expect("Unable to read file");
+
+    let parts: Vec<String> = input
+        .split("\n\n")
+        .map(|s| s.to_string())
+        .collect();
+
+    let first = parts[0]
+        .split_whitespace()
+        .map(|s| s.to_string())
+        .collect();
+    
+    let second = parts[1]
+        .split_whitespace()
+        .map(|s| s.to_string())
+        .collect();
+
+    (first, second)
 }
