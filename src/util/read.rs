@@ -16,6 +16,10 @@ pub fn read_file(file: &str) -> Vec<String> {
     lines
 }
 
+pub fn read_file_string(file: &str) -> String {
+    fs::read_to_string(file).expect("Unable to read file")
+}
+
 pub fn read_file_split(file: &str) -> (Vec<String>, Vec<String>) {
     let input= fs::read_to_string(file).expect("Unable to read file");
 
