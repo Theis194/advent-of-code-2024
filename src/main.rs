@@ -5,10 +5,11 @@ use advent_of_code::days::{
     day3,
     day4,
     day5,
+    day6,
 };
 
 fn main() {
-    println!("day3");
+    println!("day6");
     println!("==========================");
-    day3::result();
+    day6::result();
 }
